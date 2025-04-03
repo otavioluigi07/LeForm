@@ -13,7 +13,7 @@ const Cursos = () => {
     specialization: [],
     priceRange: ''
   });
-  
+
   // Função para filtrar cursos com base nos filtros selecionados
   useEffect(() => {
     let result = [...mockCourses];
@@ -22,8 +22,7 @@ const Cursos = () => {
     if (searchTerm) {
       result = result.filter(course => 
         course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.doctor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        course.specialization.toLowerCase().includes(searchTerm.toLowerCase())
+        course.doctor.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     
@@ -45,7 +44,7 @@ const Cursos = () => {
     
     setFilteredCourses(result);
   }, [searchTerm, selectedFilters]);
-  
+
   // Função para limpar filtros
   const clearFilters = () => {
     setSelectedFilters({
@@ -64,6 +63,7 @@ const Cursos = () => {
           Quer se especializar? Conheça nossos cursos.
         </h2>
 
+        {/* Barra de Pesquisa e Botão de Filtros */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="relative flex-1">
             <input
@@ -85,7 +85,9 @@ const Cursos = () => {
           </button>
         </div>
 
+        {/* Conteúdo Principal */}
         <div className="flex flex-col sm:flex-row gap-8">
+          {/* Filtros */}
           <div className={`${showFilters ? 'block' : 'hidden'} sm:block flex-shrink-0`}>
             <Filtros 
               selectedFilters={selectedFilters}
@@ -93,7 +95,9 @@ const Cursos = () => {
             />
           </div>
           
+          {/* Lista de Cursos */}
           <div className="flex-1">
+            {/* Contador e Limpar Filtros */}
             <div className="flex justify-between items-center mb-6">
               <p className="text-gray-600">{filteredCourses.length} cursos encontrados</p>
               {(selectedFilters.specialization.length > 0 || selectedFilters.priceRange || searchTerm) && (
@@ -106,25 +110,21 @@ const Cursos = () => {
               )}
             </div>
             
+            {/* Grid de Cursos */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredCourses.map((curso, index) => (
-                <CursoCard key={index} {...curso} />
+              {filteredCourses.map((curso) => (
+                <CursoCard 
+                  key={curso.id} 
+                  {...curso} 
+                  link={curso.link} // Passa o link específico do curso
+                />
               ))}
             </div>
 
+            {/* Mensagem Caso Não Haja Resultados */}
             {filteredCourses.length === 0 && (
               <div className="text-center py-10">
                 <p className="text-gray-500">Nenhum curso encontrado com os filtros selecionados.</p>
-              </div>
-            )}
-
-            {filteredCourses.length > 0 && (
-              <div className="flex justify-center items-center mt-12 gap-2">
-                <button className="p-2 rounded-lg hover:bg-gray-100">&lt;</button>
-                <button className="p-2 rounded-lg bg-[#FF879B] text-white">1</button>
-                <button className="p-2 rounded-lg hover:bg-gray-100">...</button>
-                <button className="p-2 rounded-lg hover:bg-gray-100">12</button>
-                <button className="p-2 rounded-lg hover:bg-gray-100">&gt;</button>
               </div>
             )}
           </div>
@@ -132,6 +132,6 @@ const Cursos = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Cursos;
