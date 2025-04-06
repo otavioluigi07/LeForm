@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import icon1 from "../public/assets/icon1.png"
+import icon1 from "../src/assets/icon1.png"
 
 function Services() {
   return (

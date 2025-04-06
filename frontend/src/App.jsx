@@ -9,12 +9,11 @@ function App() {
 
   return (
     <div className='px-10'>
+      aaaaaaaaaaaaa
       <Navbar></Navbar>
       <Banner></Banner>
       <Services></Services>
-
-
-
+    
 
 
     </div>

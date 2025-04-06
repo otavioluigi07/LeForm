@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { FiMenu } from "react-icons/fi";
-import logo from "../public/assets/logo.png"
-import mulher from "../public/assets/mulher.png"
+import logo from "../src/assets/logo.png"
+import mulher from "../src/assets/mulher.png"
 
 function Banner() {
   return (
